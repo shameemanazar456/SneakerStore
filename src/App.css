@@ -1,0 +1,81 @@
+.video_section {
+  width: 100%;
+  height: 500px; /* Adjust the height as per your preference */
+  overflow: hidden;
+}
+
+.video_section video {
+  width: 100%;
+  height: auto;
+}
+.collection {
+  position: relative;
+}
+#collection_btn {
+  position: absolute;
+  left: 10%;
+  top: 80%;
+  border-radius: 10px;
+}
+.b_heading,
+.g_heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.b_heading h2 {
+  font-family: "Dancing Script", cursive;
+  font-size: 45px;
+  font-weight: 800;
+  color: rgb(113, 113, 212);
+  margin: 0;
+}
+.g_heading h2 {
+  font-family: "Dancing Script", cursive;
+  font-size: 45px;
+  font-weight: 800;
+  color: palevioletred;
+  margin: 0;
+}
+.b_box {
+  width: 300px;
+  height: 77px;
+  border: solid 5px #000;
+  border-color: rgb(113, 113, 212) transparent transparent transparent;
+  border-radius: 50% / 100px 100px 0 0;
+}
+.g_box {
+  width: 300px;
+  height: 77px;
+  border: solid 5px #000;
+  border-color: palevioletred transparent transparent transparent;
+  border-radius: 50%/100px 100px 0 0;
+}
+.heading_collection h2 {
+  font-family: "Dancing Script", cursive;
+  font-size: 45px;
+  font-weight: 800;
+  color: purple;
+}
+.product_details h2 {
+  font-family: "Dancing Script", cursive;
+  font-size: 45px;
+  font-weight: 800;
+}
+.p1 {
+  color: rgb(113, 113, 212);
+}
+.p2 {
+  color: palevioletred;
+}
+.itemName {
+  white-space: nowrap;
+  font-family: "Anek Devanagari", sans-serif;
+}
+.offer {
+  font-family: "Anek Devanagari", sans-serif;
+}
+.price {
+  font-family: "Anek Devanagari", sans-serif;
+}
