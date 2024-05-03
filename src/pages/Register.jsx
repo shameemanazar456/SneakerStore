@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import './Login.css'
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom'
+import { registerUserAPI } from '../services/allAPI'
+import { Link, useNavigate } from 'react-router-dom'
 const Register = () => {
+    const navigate = useNavigate('')
+    const [registerData,setRegisterData] = useState({
+        username:"",
+        email:"",
+        password:""
+    })
+    console.log(registerData);
+    const handleSubmit = async()=>{
+      const response =  await registerUserAPI(registerData)
+      console.log(response);
+      if(response.status >= 200 || response.status<300 ){
+        alert('Successfull register')
+        navigate("/")
+      }
+      else{
+        alert('something Wrong')
+      }
+    }
   return (
     <>
       <Row xs={1} md={2} >
@@ -17,21 +36,21 @@ const Register = () => {
               </div>
           <div className='d-flex justify-content-center align-items-center'>
           <FontAwesomeIcon icon={faUser} className='me-2'/>
-          <input type="text" className='input' placeholder='Username'  />
+          <input type="text" className='input' placeholder='Username' onChange={((e)=>setRegisterData({...registerData,username:e.target.value}))} />
           </div>
           <div className='d-flex justify-content-center align-items-center' >
           <FontAwesomeIcon icon={faEnvelope} className='me-2' />
-          <input type="text" className='input' placeholder='email@gmail.com' />
+          <input type="text" className='input' placeholder='email@gmail.com' onChange={((e)=>setRegisterData({...registerData,email:e.target.value}))} />
           </div>
           <div className='d-flex justify-content-center align-items-center'>
           <FontAwesomeIcon icon={faLock} className='me-2' />
-          <input type="text" className='input' placeholder='password' />
+          <input type="text" className='input' placeholder='password' onChange={((e)=>setRegisterData({...registerData,password:e.target.value}))}/>
           </div>
             <div className='d-flex justify-content-between mt-2'>
               <button className='btn btn-danger'>cancel</button>
-              <button className='btn btn-success'>Sign up</button>
+              <button className='btn btn-success' onClick={handleSubmit}>Sign up</button>
             </div>
-              <p className='mt-5 text-center'>Already a user?<span><Link to={'/login'} className='ms-1' href="">Sign in</Link></span></p>
+            <Link to={'/login'} style={{textDecoration:'none',color:'black'}}><p className='mt-5 text-center'>Already a user?<span><a className='ms-1' href="">Sign in</a></span></p></Link>
           </div>
         </div>
           </div>
