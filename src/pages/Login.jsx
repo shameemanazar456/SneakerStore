@@ -3,49 +3,45 @@ import { Col, Row } from 'react-bootstrap'
 import './Login.css'
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getAllUserApi } from '../services/allAPI'
-import { Link } from 'react-router-dom'
-const Login = () => {
-  const [signIn, setSignIn]=useState([])
-    const [loginDetails,setLoginDetails] = useState({
-        username:"",
-        password:""
-    })
-    const handleSubmit=async()=>{
-      try {
-        const response=await getAllUserApi()
-        setSignIn(response.data)
-          const existingUser = response.data.find(item=>item.username==loginDetails.username)
-          const existingPass= response.data.find(item=>item.password==loginDetails.password)
-          if(existingUser)
-          {
-            if(existingPass)
-              {
-                alert('Login successfull!')
-              }
-            else
-              {
-                alert('Invalid password!')
-              }
-          }
-          else
-          {
-            alert('Invalid username!')
-          }
-      } catch (error) {
-        console.log(error)
-      }
+import { Link, useNavigate } from 'react-router-dom'
+import { getUserDetailsApi } from '../APIcalls/AllAPI'
+
+const Login = ({setIsLoggedin, setUid}) => {
+    const navigate = useNavigate();
+    const [userData, setUserData] = useState([])
+    const [username, setUsername]=useState("")
+    const [password, setPassword] = useState("")
+    console.log(username);
+    console.log(password);
+
+    const handleLogin = async()=>{
+        const response = await getUserDetailsApi();
+        console.log(response.data);
+        setUserData(response.data)
+        let loggeduser = userData.find((item)=>item.username == username && item.password == password)
+        console.log(loggeduser.id);
+        if(loggeduser){
+            alert('Login Successfull')
+            setIsLoggedin("true")
+            setUid(loggeduser.id)
+            navigate("/")
+
+        }
+        else{
+            alert('Please check username/password')
+        }
+        console.log('inside login');
+ 
     }
-    console.log(signIn);
   return (
     <>
-      <Row xs={1} md={2} >
-        <Col style={{ height:'100vh' }} >
+      <Row className='mt-5'>
+        <Col md={6} style={{ height:'100vh' }} >
           <div className='d-flex justify-content-center align-items-center'>
           <img src="https://najas06.github.io/RARE-KICKS/shoe3.gif" alt="" style={{width:'100%',height:'100vh',padding:'0',margin:'0'}}/>
           </div>
         </Col>
-        <Col style={{backgroundColor:'white'}}>
+        <Col md={6} style={{backgroundColor:'white'}}>
           <div className='container'>
           <div id='login'>
             <div>
@@ -54,16 +50,16 @@ const Login = () => {
               </div>
           <div className='d-flex justify-content-center align-items-center'>
           <FontAwesomeIcon icon={faUser} className='me-2'/>
-          <input type="text" className='input' placeholder='Username' onChange={((e)=> setLoginDetails({...loginDetails,username:e.target.value}))} />
+          <input type="text" onChange={(e)=>setUsername(e.target.value)} className='input' placeholder='Username'  />
           </div>
           <div className='d-flex justify-content-center align-items-center'>
           <FontAwesomeIcon icon={faLock} className='me-2' />
-          <input type="text" className='input' placeholder='password' onChange={((e)=>setLoginDetails({...loginDetails,password:e.target.value}))} />
+          <input type="text" onChange={(e)=>setPassword(e.target.value)} className='input' placeholder='password' />
           </div>
             <div className='d-flex justify-content-between mt-2'>
-              <button className='btn btn-success' onClick={handleSubmit}>Sign in</button>
+              <button className='btn btn-success' type='button' onClick={handleLogin}>Sign in</button>
             </div>
-              <Link to={'/register'} style={{textDecoration:'none', color:'black'}}><p className='mt-5 text-center'>New here?<span><a className='ms-1' href="">Sign up</a></span></p></Link>
+              <p className='mt-5 text-center'>New here?<span><Link to={'/register'} className='ms-1' href="">Sign up</Link></span></p>
           </div>
         </div>
           </div>

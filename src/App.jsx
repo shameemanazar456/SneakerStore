@@ -8,8 +8,9 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import Boys from "./pages/Boys";
-import Girls from "./pages/Girls";
+import Pboys from "./Subpages/Pboys";
+import Pgirls from "./Subpages/Pgirls";
+import Wishlist from "./Subpages/Wishlist";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
@@ -19,7 +20,7 @@ function App() {
     <>
       <Header isLoggedin={isLoggedin} setIsLoggedin={setIsLoggedin} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home  uid={uid} isLoggedin={isLoggedin}  />} />
         <Route
           path="/login"
           element={<Login setIsLoggedin={setIsLoggedin} setUid={setUid} />}
@@ -29,8 +30,10 @@ function App() {
           path="/cart"
           element={<Cart uid={uid} isLoggedin={isLoggedin} />}
         />
-        <Route path="/boys" element={<Boys />} />
-        <Route path="/girls" element={<Girls />} />
+        <Route path="/boys" element={<Pboys  uid={uid} isLoggedin={isLoggedin}  />} />
+        <Route path="/girls" element={<Pgirls  uid={uid} isLoggedin={isLoggedin}  />} />
+        <Route path="/wishlist" element={<Wishlist  uid={uid} isLoggedin={isLoggedin}  />} />
+
       </Routes>
       <Footer />
     </>

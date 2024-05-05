@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import { deleteCartItemApi, getCartDetailsApi } from '../APIcalls/AllAPI';
+import { Link } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,6 +15,7 @@ function Cart({uid, isLoggedin}) {
     const [cartData, setCartData]=useState([])
     const [userData, setUserData]=useState({})
     const [total, setTotal]=useState('0')
+    const navigate = useNavigate()
 
     const[deleteItemStatus, setdeleteItemStatus] = useState("false")
     const[qty, setQty] = useState(("1"))
@@ -59,7 +62,7 @@ function Cart({uid, isLoggedin}) {
     let reqBody=userData;
     await deleteCartItemApi(newUserdata.id, reqBody)
     setdeleteItemStatus(true)
-    getCartDetails('1')
+    getCartDetails(uid)
 
     }
 /* Function to move item to the cart */
@@ -106,6 +109,20 @@ const handleDropDown=async(event, itid)=>{
 
 }
 
+ const handleCheckout = async ()=>{
+  let newUserdata = userData
+    newUserdata.Cart = {}
+    setUserData({})
+    setUserData(newUserdata)
+    console.log(userData);
+    let reqBody=userData;
+    await deleteCartItemApi(newUserdata.id, reqBody)
+    setdeleteItemStatus(true)
+    getCartDetails(uid)
+    alert('Order placed successfully')
+    navigate('/')
+
+ }
 
   useEffect(()=>{
     getCartDetails(uid)
@@ -129,7 +146,7 @@ const handleDropDown=async(event, itid)=>{
                     </div>
                     
         
-                    <button className='btn btn-success m-2 p-1  ' style={{height:'60px'}}>Check Out</button>
+                    <button onClick={handleCheckout} className='btn btn-success m-2 p-1  ' style={{height:'60px'}}>Check Out</button>
               </div>
               {cartData?.map((item)=>(
                 <div className='d-flex align-items-center justify-content-center flex-column  mt-5 p-4 shadow border  rounded col-md-6  ' style={{width:'70vh'}}>
@@ -188,8 +205,10 @@ const handleDropDown=async(event, itid)=>{
          </div>:
          <div className='border rounded d-flex justify-content-evenly align-items-center flex-column col-md-6' style={{width:'250px', height:'150px'}}>
          <h6 className='text-center text-warning'>You Cart is Empty...</h6>
-         <button className='btn btn-success'>Shop Now</button>
-    
+<Link style={{textDecoration:'none'}} to={'/'}>
+           <button className='btn btn-success'>Shop Now</button>
+  
+</Link>    
     
      </div>}
           

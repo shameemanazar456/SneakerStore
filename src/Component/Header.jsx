@@ -57,7 +57,7 @@ function Header({ isLoggedin, setIsLoggedin }) {
                 id="basic-nav-dropdown"
                 className="me-2 text-light"
               >
-                <NavDropdown.Item href="/cart">
+                <NavDropdown.Item href="/boys">
                   <Link
                     style={{ textDecoration: "none", color: "black" }}
                     to={"/boys"}
@@ -76,14 +76,14 @@ function Header({ isLoggedin, setIsLoggedin }) {
               </NavDropdown>
 
               <Nav.Link>
-                <button className="bg-transparent border-0">
+                <Link to={"/wishlist"} style={{textDecoration:'none'}} className="bg-transparent text-dark border-0">
                   <FontAwesomeIcon
                     icon={faHeart}
                     style={{ color: "#e70404" }}
                     className="me-1"
                   />
                   Wishlist
-                </button>
+                </Link>
               </Nav.Link>
 
               <Nav.Link>

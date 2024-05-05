@@ -4,7 +4,7 @@ import Carousel from "../Subpages/Carousel";
 import Collection from "../Subpages/Collection";
 import Products from "../Subpages/Products";
 
-const Home = () => {
+const Home = ({uid, isLoggedin}) => {
   return (
     <div
       className="home  px-4 pt-3"
@@ -24,7 +24,7 @@ const Home = () => {
         <Collection />
       </div>
       <div className="products">
-        <Products />
+        <Products  uid={uid} isLoggedin={isLoggedin}  />
       </div>
     </div>
   );

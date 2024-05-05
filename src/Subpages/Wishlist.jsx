@@ -1,52 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { deleteCartItemApi, getCartDetailsApi, getProductsApi } from "../APIcalls/AllAPI";
+import { Link, useNavigate } from "react-router-dom";
 // import { getProductsApi } from "../Apis/allApi";
 
-const Products = ({uid, isLoggedin}) => {
-  const [product, setProduct] = useState([]);
+const Wishlist = ({uid, isLoggedin}) => {
+  const [wishlist,setWishlist] = useState([])
   const [userData, setUserData] = useState({})
 
+  const navigate = useNavigate()
   useEffect(() => {
-    const getProduct = async () => {
-       
-      const response = await getCartDetailsApi(uid)
-      console.log(response.data);
-      setUserData(response.data)
-
-  
-      const res = await getProductsApi();
-      console.log(res.data);
-      setProduct(res.data); // Assuming response is an array of products
-    };
+   
+  /*  if(isLoggedin){
     getProduct();
-  }, []);
-  console.log(product);
+   }
+   else{
+    alert('Please login')
+    navigate("/login")
+ 
+   } */
+   getProduct('1')
 
-  const addtoWishlist= async(id)=>{
+  }, [wishlist]);
 
-   if(isLoggedin) {console.log('inside wishlist');
-    let selectedItem = product.find((item)=>item.itemID == id)
+  const getProduct = async (uid) => {
+       
+    const response = await getCartDetailsApi(uid)
+    console.log(response.data)
+    let u = response.data
+    console.log(u);
+    setUserData(u)
+    console.log(userData);
+    console.log(u.wishlist);
+    setWishlist(u.wishlist)
+    console.log(wishlist);
+ }
+
+  const deleteWishlist= async(id)=>{
+
+   if(true) {console.log('inside wishlist');
+    let selectedItem = wishlist.find((item)=>item.itemID == id)
     console.log(selectedItem);
     let newUserData = userData
     console.log(userData);
+   let newWishlist = newUserData.wishlist.filter((item)=>item.itemID != id)
    
-    if(newUserData.wishlist.find((item)=>item.itemID == id)){
-        alert('Item Already in Wishlist ')
-    }
-    else{
-        newUserData.wishlist.push(selectedItem)
-    }
+        newUserData.wishlist = newWishlist
+    
     setUserData({})
     setUserData(newUserData)
     console.log(userData);
     await deleteCartItemApi(newUserData.id, newUserData)
   }
-    else{
-      alert('Please Login')
-    }
 
     
 
@@ -71,7 +78,6 @@ const addtoCart= async(id)=>{
 }
   
 
-  const displayedProducts = product.slice(5, 13);
 
   return (
     <>
@@ -80,11 +86,11 @@ const addtoCart= async(id)=>{
         style={{ marginTop: "40px", textAlign: "center" }}
       >
         <h2>
-          <span className="p1">Our </span>
-          <span className="p2">Products</span>
+          <span className="p2">Wishlist</span>
         </h2>
         <Row className="ms-5 me-3">
-          {displayedProducts.map((item, index) => (
+          {wishlist.length > 0?
+          wishlist.map((item, index) => (
             <Col key={index} className="mb-5 mt-4" sm={12} md={6} lg={4} xl={3}>
               <Card className="rounded w-100 shadow-lg">
                 <Card.Img
@@ -105,11 +111,8 @@ const addtoCart= async(id)=>{
                     </p>
                   </Card.Text>
                   <div className="d-flex align-items-center justify-content-between">
-                    <Button onClick={()=>addtoWishlist(item.itemID)} variant="outline-danger" className="rounded">
-                      <FontAwesomeIcon
-                        icon={faHeart}
-                        style={{ color: "#e90101" }}
-                      />{" "}
+                    <Button onClick={()=>deleteWishlist(item.itemID)} variant="outline-danger" className="rounded">
+                    <FontAwesomeIcon icon={faTrash} style={{color: "#ec0909",}} />
                     </Button>
                     <Button onClick={()=>addtoCart(item.itemID)} variant="outline-warning" className="rounded">
                       <FontAwesomeIcon
@@ -121,11 +124,20 @@ const addtoCart= async(id)=>{
                 </Card.Body>
               </Card>
             </Col>
-          ))}
+          )):
+          <div className=' rounded d-flex justify-content-evenly align-items-center flex-column col-md-6 m-5 p-5' style={{width:'100%', height:'auto'}}>
+         <h2 className='text-center text-warning '>You WishList is Empty...</h2>
+<Link style={{textDecoration:"none"}} to={'/'}>
+           <button  className='btn btn-success'>Home</button>
+  
+</Link>    
+    
+     </div>}
         </Row>
       </div>
+     
     </>
   );
 };
 
-export default Products;
+export default Wishlist;

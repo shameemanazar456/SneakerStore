@@ -4,7 +4,7 @@ import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getProductsApi } from "../APIcalls/AllAPI";
 
-const Pboys = () => {
+const Pboys = ({uid, isLoggedin}) => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {

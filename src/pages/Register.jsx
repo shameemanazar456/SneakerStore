@@ -5,23 +5,40 @@ import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { registerUserAPI } from '../services/allAPI'
 import { Link, useNavigate } from 'react-router-dom'
+import { addUserApi, getUserDetailsApi } from '../APIcalls/AllAPI'
 const Register = () => {
     const navigate = useNavigate('')
+    const [AllUser, setAllUser] =useState ([])
     const [registerData,setRegisterData] = useState({
         username:"",
-        email:"",
-        password:""
+        id:"",
+        password:"",
+        Cart:[],
+        wishlist:[]
     })
     console.log(registerData);
     const handleSubmit = async()=>{
-      const response =  await registerUserAPI(registerData)
+
+      const result = await getUserDetailsApi()
+      console.log(result);
+      setAllUser(result.data)
+      console.log(AllUser);
+      if(AllUser.find((item)=>item.id != registerData.id && item.username != registerData.username))
+    {  
+       AllUser.push(registerData)
+      console.log(AllUser); 
+      const response =  await addUserApi(registerData)
       console.log(response);
       if(response.status >= 200 || response.status<300 ){
         alert('Successfull register')
-        navigate("/")
+        
+        navigate("/login")
       }
       else{
         alert('something Wrong')
+      }}
+      else{
+        alert('User already exist')
       }
     }
   return (
@@ -40,7 +57,7 @@ const Register = () => {
           </div>
           <div className='d-flex justify-content-center align-items-center' >
           <FontAwesomeIcon icon={faEnvelope} className='me-2' />
-          <input type="text" className='input' placeholder='email@gmail.com' onChange={((e)=>setRegisterData({...registerData,email:e.target.value}))} />
+          <input type="text" className='input' placeholder='email@gmail.com' onChange={((e)=>setRegisterData({...registerData,id:e.target.value}))} />
           </div>
           <div className='d-flex justify-content-center align-items-center'>
           <FontAwesomeIcon icon={faLock} className='me-2' />
