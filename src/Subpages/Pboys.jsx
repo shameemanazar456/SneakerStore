@@ -4,7 +4,7 @@ import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getProductsApi } from "../APIcalls/AllAPI";
 
-const Pboys = ({uid, isLoggedin}) => {
+const Pboys = ({ uid, isLoggedin }) => {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Pboys = ({uid, isLoggedin}) => {
 
   return (
     <>
-      <div className="product_details" style={{ textAlign: "center" }}>
+      <div className="product_details mt-5" style={{ textAlign: "center" }}>
         <Row className="ms-5 me-3">
           {displayedProducts.map((item, index) => (
             <Col key={index} className="mb-5 mt-4" sm={12} md={6} lg={4} xl={3}>
