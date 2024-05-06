@@ -13,15 +13,14 @@ const Wishlist = ({uid, isLoggedin}) => {
   const navigate = useNavigate()
   useEffect(() => {
    
-  /*  if(isLoggedin){
-    getProduct();
+  if(isLoggedin){
+    getProduct(uid);
    }
    else{
     alert('Please login')
     navigate("/login")
  
-   } */
-   getProduct('1')
+   } 
 
   }, [wishlist]);
 
@@ -31,7 +30,7 @@ const Wishlist = ({uid, isLoggedin}) => {
     console.log(response.data)
     let u = response.data
     console.log(u);
-    setUserData(u)
+    setUserData(u);
     console.log(userData);
     console.log(u.wishlist);
     setWishlist(u.wishlist)
@@ -40,18 +39,19 @@ const Wishlist = ({uid, isLoggedin}) => {
 
   const deleteWishlist= async(id)=>{
 
-   if(true) {console.log('inside wishlist');
+   if(isLoggedin) {console.log('inside wishlist');
     let selectedItem = wishlist.find((item)=>item.itemID == id)
     console.log(selectedItem);
-    let newUserData = userData
-    console.log(userData);
+    const response = await getCartDetailsApi(uid)
+    console.log(response.data)
+    let u = response.data
+  let newUserData = u
    let newWishlist = newUserData.wishlist.filter((item)=>item.itemID != id)
    
         newUserData.wishlist = newWishlist
     
     setUserData({})
     setUserData(newUserData)
-    console.log(userData);
     await deleteCartItemApi(newUserData.id, newUserData)
   }
 
@@ -59,21 +59,28 @@ const Wishlist = ({uid, isLoggedin}) => {
 
 }
 const addtoCart= async(id)=>{
-  console.log('inside cart');
-  let selectedItem = product.find((item)=>item.itemID == id)
+  let selectedItem = userData.wishlist.find((item)=>item.itemID == id)
   console.log(selectedItem);
-  let newUserData = userData
- 
-  if(newUserData.Cart.find((item)=>item.itemID == id)){
+  const response = await getCartDetailsApi(uid)
+    console.log(response.data)
+    let u = response.data
+  let newUserData = u
+ if(newUserData.Cart.length>0){
+   if(newUserData.Cart.find((item)=>item.itemID == id)){
       alert('Item Already in Cart ')
   }
   else{
-      
       newUserData.Cart.push(selectedItem)
+      alert('Item Added to Cart')
+      deleteWishlist(id)
+  }}
+  else{
+    newUserData.Cart.push(selectedItem)
+    alert('Item Added to Cart')
+    deleteWishlist(id)
   }
   setUserData({})
   setUserData(newUserData)
-  console.log(userData);
   await deleteCartItemApi(newUserData.id, newUserData)
 }
   

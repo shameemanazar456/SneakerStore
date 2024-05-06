@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 import { deleteCartItemApi, getCartDetailsApi } from '../APIcalls/AllAPI';
-import { Link } from '@mui/material';
+import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -89,29 +89,12 @@ const handleMove = async (id)=>{
 
 }
 const handleDropDown=async(event, itid)=>{
-  console.log('handle drop down');
-  console.log(event);
-    /* let selectedItem = cartData.find((item)=>item.itemID == itid)
-    let newData = userData
-    selectedItem.qty=value
-    console.log(selectedItem);
-    newData.Cart=selectedItem 
-    
-    setUserData({})
-
-    setUserData(newData)
-    reqBody = userData
-    await deleteCartItemApi(newData.id, reqBody)*/
-
-
-
-    
-
+  console.log('inside dropdown')
 }
 
  const handleCheckout = async ()=>{
   let newUserdata = userData
-    newUserdata.Cart = {}
+    newUserdata.Cart = []
     setUserData({})
     setUserData(newUserdata)
     console.log(userData);
@@ -153,22 +136,16 @@ const handleDropDown=async(event, itid)=>{
               <div className='d-flex'>
                    <div className=''> 
                      <img src={item?.img} alt="" style={{height:'100px'}} />
-                    {/*  <select name="" id="qty" className='form-control btn btn-success w-50 my-2' onChange={(e)=>handleDropDown(e,item.itemId)}>
-                        <option for='qty' value="1">Qty 1</option>
-                        <option value="2">Qty 2</option>
-
-                     </select> */}
+                   
                       <Dropdown className='my-2' onChange={()=>handleDropDown(item.itemId)}>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Qty {item?.qty}
+                    Qty 1
                   </Dropdown.Toggle>
 
             
                   <Dropdown.Menu>
                    <button onClick={()=>handleDropDown(1, item.i)}>  <Dropdown.Item >1</Dropdown.Item></button>
-                    <Dropdown.Item >2</Dropdown.Item>
-                    <Dropdown.Item  >3</Dropdown.Item>
-                    <Dropdown.Item >4</Dropdown.Item>
+                   
             
                   </Dropdown.Menu>
                 </Dropdown> 

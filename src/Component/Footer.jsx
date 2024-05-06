@@ -17,6 +17,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Footer() {
+  const handleSubscribe = ()=>{
+    alert('Thankyou for your Subscription')
+  }
   return (
     <div className="bg-secondary">
       <Row>
@@ -53,7 +56,7 @@ function Footer() {
           <p>
             {" "}
             <a style={{ textDecoration: "none" }} className="text-light">
-              <Link></Link>Wishlist
+              <Link to={"/wishlist"}  style={{ textDecoration: "none", color: "white" }}>Wishlist</Link>
             </a>
             <br></br>
           </p>
@@ -95,7 +98,7 @@ function Footer() {
               placeholder="Enter Your Email ID"
               className="form-control w-75 me-3"
             />
-            <button className="btn btn-warning w-50">Subscribe</button>
+            <button onClick={handleSubscribe} className="btn btn-warning w-50">Subscribe</button>
           </form>
           <div className="d-flex justify-content-evenly mt-4 ">
             <FontAwesomeIcon

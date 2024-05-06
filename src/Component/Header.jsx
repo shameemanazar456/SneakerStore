@@ -25,7 +25,7 @@ function Header({ isLoggedin, setIsLoggedin }) {
 
   return (
     <>
-      <Navbar expand="lg" className="bg-secondary px-4">
+      <Navbar expand="lg" className="bg-secondary px-4 w-100" style={{zIndex:'9', position:'fixed', top:'0px'}}>
         <>
           <button className="border border-0 bg-transparent">
             <Navbar.Brand href="#home" className="text-light">
@@ -65,7 +65,7 @@ function Header({ isLoggedin, setIsLoggedin }) {
                     Boys
                   </Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/login">
+                <NavDropdown.Item href="">
                   <Link
                     style={{ textDecoration: "none", color: "black" }}
                     to={"/girls"}
