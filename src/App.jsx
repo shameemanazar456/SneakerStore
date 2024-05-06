@@ -11,6 +11,8 @@ import Register from "./pages/Register";
 import Pboys from "./Subpages/Pboys";
 import Pgirls from "./Subpages/Pgirls";
 import Wishlist from "./Subpages/Wishlist";
+import Girls from "./pages/Girls";
+import Boys from "./pages/Boys";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
@@ -30,8 +32,8 @@ function App() {
           path="/cart"
           element={<Cart uid={uid} isLoggedin={isLoggedin} />}
         />
-        <Route path="/boys" element={<Pboys  uid={uid} isLoggedin={isLoggedin}  />} />
-        <Route path="/girls" element={<Pgirls  uid={uid} isLoggedin={isLoggedin}  />} />
+        <Route path="/boys" element={<Boys uid={uid} isLoggedin={isLoggedin}  />} />
+        <Route path="/girls" element={<Girls  uid={uid} isLoggedin={isLoggedin}  />} />
         <Route path="/wishlist" element={<Wishlist  uid={uid} isLoggedin={isLoggedin}  />} />
 
       </Routes>

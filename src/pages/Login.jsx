@@ -42,7 +42,7 @@ const Login = ({setIsLoggedin, setUid}) => {
           </div>
         </Col>
         <Col md={6} style={{backgroundColor:'white'}}>
-          <div className='container'>
+          <div className=''>
           <div id='login'>
             <div>
               <div className='d-flex justify-content-center align-items-center'>
@@ -54,10 +54,10 @@ const Login = ({setIsLoggedin, setUid}) => {
           </div>
           <div className='d-flex justify-content-center align-items-center'>
           <FontAwesomeIcon icon={faLock} className='me-2' />
-          <input type="text" onChange={(e)=>setPassword(e.target.value)} className='input' placeholder='password' />
+          <input type="password" onChange={(e)=>setPassword(e.target.value)} className='input' placeholder='password' />
           </div>
-            <div className='d-flex justify-content-between mt-2'>
-              <button className='btn btn-success' type='button' onClick={handleLogin}>Sign in</button>
+            <div className='d-flex justify-content-between mt-2 ms-4'>
+              <button className='btn btn-success ms-5' type='button' onClick={handleLogin}>Sign in</button>
             </div>
               <p className='mt-5 text-center'>New here?<span><Link to={'/register'} className='ms-1' href="">Sign up</Link></span></p>
           </div>

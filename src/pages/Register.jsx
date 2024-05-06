@@ -45,7 +45,7 @@ const Register = () => {
     <>
       <Row xs={1} md={2} >
         <Col style={{backgroundColor:'white'}}>
-          <div className='container'>
+          <div className=''>
           <div id='login'>
             <div>
               <div className='d-flex justify-content-center align-items-center'>
