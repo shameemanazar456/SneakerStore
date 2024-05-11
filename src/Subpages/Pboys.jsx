@@ -3,6 +3,8 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getProductsApi } from "../APIcalls/AllAPI";
+import { Link } from "react-router-dom";
+import Details from "./Details";
 
 const Pboys = ({uid, isLoggedin}) => {
   const [product, setProduct] = useState([]);
@@ -56,6 +58,15 @@ const Pboys = ({uid, isLoggedin}) => {
                         style={{ color: "#FFD43B" }}
                       />
                     </Button>
+ {/*--------------------------modified---------------------* */}
+                
+                        <Link to={'/details'}>
+                            <Button variant="outline-info" className="rounded" >
+                              Know More 
+                            </Button>
+                        </Link>
+             
+ {/*--------------------------modified---------------------* */}
                   </div>
                 </Card.Body>
               </Card>
