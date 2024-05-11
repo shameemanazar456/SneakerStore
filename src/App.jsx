@@ -36,6 +36,8 @@ function App() {
         <Route path="/girls" element={<Girls  uid={uid} isLoggedin={isLoggedin}  />} />
         <Route path="/wishlist" element={<Wishlist  uid={uid} isLoggedin={isLoggedin}  />} />
 
+         <Route path="/Details"  element={<Details/>}/>
+        
       </Routes>
       <Footer />
     </>
