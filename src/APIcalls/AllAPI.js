@@ -24,3 +24,7 @@ export const addUserApi= async (reqBody) => {
 export const getProductsApi = async () => {
   return await commonAPI("GET", `${serverURL}/products`, "");
 };
+//api to get products details
+export const getProductDetailsApi = async (id) => {
+  return await commonAPI("GET", `${serverURL}/products`, "");
+};

@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { faHeart ,faCartShopping} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getDetailsApi } from "../APIcalls/AllAPI";
 import Products from "./Products";
 
 
 
-const Details = ({uid, isLoggedin}) => {
+const Details = ({uid, isLoggedin, pid}) => {
 const [details, setDetails] = useState([]);
 
 useEffect(() => {
-const getDetails = async () => {
-const res = await getDetailsApi("1");
+const getDetails = async (pid) => {
+const res = await getProductDetailsApi(pid);
 setDetails(res.data);
 };
 getDetails();

@@ -3,11 +3,13 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { deleteCartItemApi, getCartDetailsApi, getProductsApi } from "../APIcalls/AllAPI";
+import { useNavigate } from "react-router-dom";
 // import { getProductsApi } from "../Apis/allApi";
 
 const Products = ({uid, isLoggedin}) => {
   const [product, setProduct] = useState([]);
   const [userData, setUserData] = useState({})
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -72,6 +74,9 @@ const addtoCart= async(id)=>{
   
 
   const displayedProducts = product.slice(5, 13);
+  const getProduct =(pid)=>{
+    navigate('/')
+  }
 
   return (
     <>
@@ -91,6 +96,7 @@ const addtoCart= async(id)=>{
                   variant="top"
                   src={item.img}
                   style={{ height: "200px" }}
+                  onClick={()=>getProduct(item.id)}
                 />
                 <Card.Body>
                   <Card.Title className="itemName">{item.name}</Card.Title>
