@@ -13,6 +13,7 @@ import Pgirls from "./Subpages/Pgirls";
 import Wishlist from "./Subpages/Wishlist";
 import Girls from "./pages/Girls";
 import Boys from "./pages/Boys";
+import Details from "./Subpages/Details";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
