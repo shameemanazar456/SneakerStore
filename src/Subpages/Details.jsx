@@ -12,7 +12,7 @@ const [details, setDetails] = useState([]);
 
 useEffect(() => {
 const getDetails = async () => {
-const res = await getDetailsApi(Products);
+const res = await getDetailsApi("1");
 setDetails(res.data);
 };
 getDetails();
