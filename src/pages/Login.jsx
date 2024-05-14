@@ -22,7 +22,7 @@ const Login = ({setIsLoggedin, setUid}) => {
         console.log(loggeduser.id);
         if(loggeduser){
             alert('Login Successfull')
-            setIsLoggedin("true")
+            setIsLoggedin(true)
             setUid(loggeduser.id)
             navigate("/")
 

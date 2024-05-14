@@ -2,13 +2,87 @@ import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getProductsApi } from "../APIcalls/AllAPI";
-import { Link } from "react-router-dom";
-const Pgirls = ({uid, isLoggedin}) => {
+import { deleteCartItemApi, getCartDetailsApi, getProductsApi } from "../APIcalls/AllAPI";
+
+import { Link, useNavigate } from "react-router-dom";
+
+const Pgirls = ({uid, isLoggedin, setProductViewID}) => {
   const [product, setProduct] = useState([]);
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate()
+
+
+  const addtoWishlist= async(id)=>{
+
+    if(isLoggedin) {
+      const response = await getCartDetailsApi(uid)
+      console.log(response.data);
+      setUserData(response.data)
+      console.log(userData);
+      
+      console.log('inside wishlist');
+     let selectedItem = product.find((item)=>item.itemID == id)
+     console.log(selectedItem);
+     let newUserData = userData
+     console.log(userData);
+    
+     if(newUserData.wishlist.find((item)=>item.itemID == id)){
+         alert('Item Already in Wishlist ')
+     }
+     else{
+         newUserData.wishlist.push(selectedItem)
+         alert('Item Added to Wishlist')
+
+     }
+     setUserData({})
+     setUserData(newUserData)
+     console.log(userData);
+     await deleteCartItemApi(newUserData.id, newUserData)
+   }
+     else{
+       alert('Please Login')
+     }
+ 
+     
+ 
+ }
+ const addtoCart= async(id)=>{
+ if(isLoggedin){
+  const response = await getCartDetailsApi(uid)
+ console.log(response.data);
+ setUserData(response.data)
+ console.log(userData);
+   console.log('inside cart');
+   let selectedItem = product.find((item)=>item.itemID == id)
+   console.log(selectedItem);
+   let newUserData = response.data
+  
+   if(newUserData.Cart.find((item)=>item.itemID == id)){
+       alert('Item Already in Cart ')
+   }
+   else{
+       
+       newUserData.Cart.push(selectedItem)
+       alert('Item Added to Cart')
+   }
+   setUserData({})
+   setUserData(newUserData)
+   console.log(userData);
+   await deleteCartItemApi(newUserData.id, newUserData)}
+   else{
+     alert('Please Login')
+     navigate('/login')
+   }
+ }
+   const ViewProduct =(id)=>
+    {
+      setProductViewID(id)
+      navigate('/Details')
+    }
 
   useEffect(() => {
     const getProduct = async () => {
+     
       const res = await getProductsApi();
       setProduct(res.data); // Assuming response is an array of products
     };
@@ -42,24 +116,24 @@ const Pgirls = ({uid, isLoggedin}) => {
                     </p>
                   </Card.Text>
                   <div className="d-flex align-items-center justify-content-between">
-                    <Button variant="outline-danger" className="rounded">
+                    <Button variant="outline-danger" ononClick={()=>addtoWishlist(item.itemID)}  className="rounded">
                       <FontAwesomeIcon
                         icon={faHeart}
                         style={{ color: "#e90101" }}
                       />{" "}
                     </Button>
-                    <Button variant="outline-warning" className="rounded">
+                    <Button variant="outline-warning" onClick={()=>addtoCart(item.itemID)} className="rounded">
                       <FontAwesomeIcon
                         icon={faCartPlus}
                         style={{ color: "#FFD43B" }}
                       />
                     </Button>
 
-                    <Link to={'/details'}>
-                            <Button variant="outline-info" className="rounded" >
+                    
+                          {/*   <Button onClick={()=>ViewProduct(item.itemID)} variant="outline-info" className="rounded" >
                               Know More 
-                            </Button>
-                        </Link>
+                            </Button> */}
+                       
                    
                   </div>
                 </Card.Body>

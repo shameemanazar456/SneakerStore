@@ -58,11 +58,11 @@ function Cart({uid, isLoggedin}) {
     newUserdata.Cart = selectedItem
     setUserData({})
     setUserData(newUserdata)
-    console.log(userData);
+    //console.log(userData);
     let reqBody=userData;
     await deleteCartItemApi(newUserdata.id, reqBody)
     setdeleteItemStatus(true)
-    getCartDetails(uid)
+   // getCartDetails(uid)
 
     }
 /* Function to move item to the cart */
@@ -70,12 +70,7 @@ function Cart({uid, isLoggedin}) {
 const handleMove = async (id)=>{
     let selectedItem = cartData.find((item)=>item.itemID == id)
     let newUserData = userData
-   /*  let newCart =  cartData.filter((item)=>item.itemID != id)
-    newUserData.Cart = newCart */
-/*     setdeleteItemStatus(true)
- */
-/*     console.log(newCart);
- */    if(newUserData.wishlist.find((item)=>item.itemID == id)){
+       if(newUserData.wishlist.find((item)=>item.itemID == id)){
         alert('Item Already in Wishlist ')
     }
     else{
@@ -83,7 +78,7 @@ const handleMove = async (id)=>{
     }
     setUserData({})
     setUserData(newUserData)
-    console.log(userData);
+  //  console.log(userData);
     handleDelete(id);
     
 
@@ -107,9 +102,13 @@ const handleDropDown=async(event, itid)=>{
 
  }
 
-  useEffect(()=>{
+  useEffect(()=>{if(isLoggedin){
     getCartDetails(uid)
-    setdeleteItemStatus(false)
+    setdeleteItemStatus(false)}
+    else{
+      alert('Please Login')
+      navigate('/login')
+    }
   },[cartData, deleteItemStatus, total, , isLoggedin])
 
   return (

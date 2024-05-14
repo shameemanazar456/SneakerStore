@@ -18,6 +18,7 @@ import Details from "./Subpages/Details";
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [uid, setUid] = useState(null);
+  const [productViewID, setProductViewID]= useState(null)
 
   return (
     <>
@@ -33,11 +34,11 @@ function App() {
           path="/cart"
           element={<Cart uid={uid} isLoggedin={isLoggedin} />}
         />
-        <Route path="/boys" element={<Boys uid={uid} isLoggedin={isLoggedin}  />} />
-        <Route path="/girls" element={<Girls  uid={uid} isLoggedin={isLoggedin}  />} />
+        <Route path="/boys" element={<Boys uid={uid} isLoggedin={isLoggedin} setProductViewID={setProductViewID}  />} />
+        <Route path="/girls" element={<Girls  uid={uid} isLoggedin={isLoggedin} setProductViewID={setProductViewID}  />} />
         <Route path="/wishlist" element={<Wishlist  uid={uid} isLoggedin={isLoggedin}  />} />
 
-         <Route path="/Details"  element={<Details/>}/>
+         <Route path="/Details"  element={<Details productViewID={productViewID}/>}/>
         
       </Routes>
       <Footer />

@@ -1,7 +1,8 @@
 import React from "react";
 import Pgirls from "../Subpages/Pgirls";
 
-const Girls = () => {
+const Girls = ({isLoggedin, uid, setProductViewID}) => {
+  
   return (
     <>
       <div className="girls_collection" style={{marginTop:'70px'}}>
@@ -10,7 +11,7 @@ const Girls = () => {
           <div className="g_box"></div>
         </div>
         <div className="g_contents mt-3">
-          <Pgirls />
+          <Pgirls isLoggedin={isLoggedin} uid={uid} setProductViewID={setProductViewID} />
         </div>
       </div>
     </>

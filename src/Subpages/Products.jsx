@@ -40,6 +40,8 @@ const Products = ({uid, isLoggedin}) => {
     }
     else{
         newUserData.wishlist.push(selectedItem)
+        alert('Item Added to Wishlist')
+
     }
     setUserData({})
     setUserData(newUserData)
@@ -54,7 +56,8 @@ const Products = ({uid, isLoggedin}) => {
 
 }
 const addtoCart= async(id)=>{
-  console.log('inside cart');
+if(isLoggedin)
+  {console.log('inside cart');
   let selectedItem = product.find((item)=>item.itemID == id)
   console.log(selectedItem);
   let newUserData = userData
@@ -65,15 +68,20 @@ const addtoCart= async(id)=>{
   else{
       
       newUserData.Cart.push(selectedItem)
+      alert('Item Added to Cart')
   }
   setUserData({})
   setUserData(newUserData)
   console.log(userData);
-  await deleteCartItemApi(newUserData.id, newUserData)
+  await deleteCartItemApi(newUserData.id, newUserData)}
+  else{
+    alert('Please Login')
+    navigate('/login')
+  }
 }
   
 
-  const displayedProducts = product.slice(5, 13);
+  const displayedProducts = product.slice(1, 20);
   const getProduct =(pid)=>{
     navigate('/')
   }
@@ -96,7 +104,7 @@ const addtoCart= async(id)=>{
                   variant="top"
                   src={item.img}
                   style={{ height: "200px" }}
-                  onClick={()=>getProduct(item.id)}
+                  onClick={()=>getProduct(item.itemID)}
                 />
                 <Card.Body>
                   <Card.Title className="itemName">{item.name}</Card.Title>
