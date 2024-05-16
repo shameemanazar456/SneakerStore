@@ -16,6 +16,7 @@ export const deleteCartItemApi = async (id, reqBody) => {
   return await commonAPI("PUT", `${serverURL}/user/${id}`, reqBody);
 };
 
+
 export const addUserApi= async (reqBody) => {
   return await commonAPI("POST", `${serverURL}/user`, reqBody);
 };

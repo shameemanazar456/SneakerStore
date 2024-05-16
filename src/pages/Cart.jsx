@@ -51,8 +51,7 @@ function Cart({uid, isLoggedin}) {
 
   /* function to delete item from cart */
   const handleDelete = async(id)=>{
-    console.log('item delet');
-    console.log(id);
+   // console.log(id);
     let selectedItem = cartData.filter((item)=>item.itemID!=id)
     let newUserdata = userData
     newUserdata.Cart = selectedItem

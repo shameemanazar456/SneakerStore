@@ -23,7 +23,7 @@ function Footer() {
   return (
     <div className="bg-secondary">
       <Row>
-        <Col md={3} className="p-5 ms-md-5">
+        <Col md={3} className="p-5 ">
           <h4 className="text-light">
             {" "}
             <img
@@ -41,8 +41,8 @@ function Footer() {
             expertise for 26 years and counting.{" "}
           </p>
         </Col>
-        <Col md={2} className="p-5 ">
-          <h4 className="text-light">Links</h4>
+        <Col md={2} className="p-5 " >
+          <h4 className="text-light  " style={{overflowX:'clip'}}>Links</h4>
           <p>
             {" "}
             <a className="text-light" style={{ textDecoration: "none" }}>
@@ -74,7 +74,7 @@ function Footer() {
           </p>
         </Col>
         <Col md={3} className="p-5">
-          <h4 className="text-light">Our Policies</h4>
+          <h4 className="text-light" style={{overflowX:'clip'}}>Our Policies</h4>
           <p className="text-light">
             <FontAwesomeIcon icon={faTruckFast} className="me-2" />
             Free Shipping Above $400
@@ -90,12 +90,12 @@ function Footer() {
             COD Available
           </p>
         </Col>
-        <Col md={3} className="pt-5 ">
-          <h4>Contact Us</h4>
+        <Col md={3} className="pt-5  p-5 ">
+          <h4 style={{overflowX:'clip'}}>Contact Us</h4>
           <form action="" className="d-flex">
             <input
               type="text "
-              placeholder="Enter Your Email ID"
+              placeholder="Enter Your Emai l ID"
               className="form-control w-75 me-3"
             />
             <button onClick={handleSubscribe} className="btn btn-warning w-50">Subscribe</button>

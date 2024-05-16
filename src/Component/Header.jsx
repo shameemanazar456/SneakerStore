@@ -1,15 +1,11 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
-import { Badge } from "react-bootstrap";
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas";
 
 function Header({ isLoggedin, setIsLoggedin }) {
   const [show, setShow] = useState(false);
@@ -25,10 +21,10 @@ function Header({ isLoggedin, setIsLoggedin }) {
 
   return (
     <>
-      <Navbar expand="lg" className="bg-secondary px-4 w-100" style={{zIndex:'9', position:'fixed', top:'0px'}}>
+      <Navbar expand="lg" className="bg-secondary px-4 w-100" style={{zIndex:'9', position:'fixed', top:'0px' }}>
         <>
-          <button className="border border-0 bg-transparent">
-            <Navbar.Brand href="#home" className="text-light">
+          <button className="border p-0 m-0 border-0 bg-transparent">
+            <Navbar.Brand href="#home" className="text-light p-0">
               <img
                 alt=""
                 src="https://png.pngtree.com/png-clipart/20230527/original/pngtree-s-logo-icon-png-image_9171884.png"
