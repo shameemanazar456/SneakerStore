@@ -72,16 +72,17 @@ const addtoCart= async(id)=>{
   else{
       newUserData.Cart.push(selectedItem)
       alert('Item Added to Cart')
-      deleteWishlist(id)
+      
   }}
   else{
     newUserData.Cart.push(selectedItem)
     alert('Item Added to Cart')
-    deleteWishlist(id)
+    
   }
   setUserData({})
   setUserData(newUserData)
   await deleteCartItemApi(newUserData.id, newUserData)
+  deleteWishlist(id)
 }
   
 
